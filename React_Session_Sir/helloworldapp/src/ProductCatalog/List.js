@@ -1,5 +1,5 @@
 import React from "react";
-import data  from './data/product.json';
+import data  from '../data/product.json';
 
 import Product from "./Product";
 

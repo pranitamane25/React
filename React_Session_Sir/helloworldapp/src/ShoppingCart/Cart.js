@@ -1,24 +1,27 @@
 import React from "react";
-import data  from './data/product.json';
+import data  from '../data/cart.json';
+import Item from "./Item";
 
-import Product from "./Product";
 
-class List extends React.Component{
+class Cart extends React.Component{
     render(){
-        const flowers=data;
+        const cartItems=data;
 
     return(
-        <div>{
-            flowers.map(item=>
-                <Product 
+        <div>
+               <h2>My Shopping Cart</h2>2
+            
+            {
+            
+            cartItems.map(item=>
+                <Item
                 key={item.id}
                  id ={item.id}
                 title ={item.title}
-                description={item.description}
                 imageurl={item.imageurl}
                 quantity={item.quantity}
                 price={item.price}
-                likes={item.likes}
+                
                 />
             )
         }
@@ -28,4 +31,4 @@ class List extends React.Component{
 }
 }
 
-export default List;
+export default Cart;

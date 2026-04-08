@@ -26,10 +26,8 @@ class Product extends React.Component{
                 <p>Unit Price: {this.props.price}</p>
                 <p>Likes: {this.state.likes}</p>
                 <Counter count={this.props.likes} handler={this.handler}></Counter>
-                <br/>
-                
+                <br/> 
                 <button>Add To Cart</button>
-
             </div>
         )
     }
