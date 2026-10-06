@@ -1,4 +1,9 @@
+import { useState } from "react";
+
 function EmployeeCard({ name,role,experience,skills }) {
+
+    const[likes,setLikes]=useState(0);
+    const[showSkills,setShowSkills]=useState(true);
 return (
     <div className="employee-card">
         
@@ -6,13 +11,28 @@ return (
        <p className="role">{role}</p>
         <p>Experience={experience} years </p>
 
-        <h4>Skills</h4>
-        <ul>
-            {skills.map((skill,index)=>(
-                <li key={index}>{skill}</li>
+        <div className="likes"></div>
+        <span> ❤️{likes}</span>
+        <button onClick={()=>setLikes(likes+1)}>
+            Like
+        </button>
 
-            ))}
-        </ul>
+
+        <h4>Skills</h4>
+         {/* Show skills only when showSkills is true */}
+            {showSkills && (
+                <ul>
+                    {skills.map((skill, index) => (
+                        <li key={index}>{skill}</li>
+                    ))}
+                </ul>
+            )}
+
+
+        <button onClick={()=>setShowSkills(!showSkills)}
+        >
+            {showSkills? "Hide Skills":"Show Skills"}
+            </button>
     </div>
   );
 }

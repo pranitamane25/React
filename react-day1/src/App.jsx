@@ -1,11 +1,28 @@
 
 import EmployeeCard from "./components/EmployeeCard";
 import "./App.css";
+import { useState } from "react";
+
 function App(){
-  return   <div className="app">
+   const[employeeCount,setEmployeeCount]=useState(3);
+
+  return <div className="app">
     <h1>Employee Management</h1>
+    <div className="employee-counter"/>
+    <h2>Total Employees:{employeeCount}</h2>
+
+    <button 
+    onClick={()=>setEmployeeCount(employeeCount+1)} >
+      Add Employee
+    </button>
+
+     <button 
+    onClick={()=>setEmployeeCount(employeeCount - 1)} >
+      Remove Employee
+    </button>
+
       <div className="employee-container"></div>
-    <br/>
+    
     <EmployeeCard
     name="Pranita Mane"
     role="Software Engineer"
