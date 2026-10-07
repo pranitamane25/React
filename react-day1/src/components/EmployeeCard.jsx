@@ -12,7 +12,7 @@ return (
         <p>Experience={experience} years </p>
 
         <div className="likes"></div>
-        <span> ❤️{likes}</span>
+        <span> ❤️ {likes}   </span>
         <button onClick={()=>setLikes(likes+1)}>
             Like
         </button>
