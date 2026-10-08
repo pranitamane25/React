@@ -4,18 +4,21 @@ function EmployeeCard({ name,role,experience,skills }) {
 
     const[likes,setLikes]=useState(0);
     const[showSkills,setShowSkills]=useState(true);
-return (
+    const[isAvailable,setIsAvailable]=useState(true);
+
+    return (
     <div className="employee-card">
         
      <h2>{name}</h2>
        <p className="role">{role}</p>
         <p>Experience={experience} years </p>
 
-        <div className="likes"></div>
+        <div className="likes">
         <span> ❤️ {likes}   </span>
         <button onClick={()=>setLikes(likes+1)}>
             Like
         </button>
+        </div>
 
 
         <h4>Skills</h4>
@@ -29,10 +32,17 @@ return (
             )}
 
 
-        <button onClick={()=>setShowSkills(!showSkills)}
-        >
+            <div className="skills-button">
+            <button onClick={()=>setShowSkills(!showSkills)}>
             {showSkills? "Hide Skills":"Show Skills"}
             </button>
+            </div>
+
+           <div className="Availability-button">
+            <button onClick={()=>setIsAvailable(!isAvailable)}> 
+            {isAvailable?"Available":"Not Available"}
+            </button>
+            </div>
     </div>
   );
 }

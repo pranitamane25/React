@@ -111,6 +111,14 @@
     cursor: pointer;
 }
 
+.skills-button {
+    display: block;
+    margin-bottom: 15px;
+}
+
+.availability-button {
+    display: block;
+}
 /* Responsive design */
 @media (max-width: 800px) {
     .employee-container {
