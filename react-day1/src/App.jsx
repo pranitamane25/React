@@ -4,11 +4,13 @@ import "./App.css";
 
 function App() {
 
-    const [employeeCount, setEmployeeCount] = useState(3);
+    const [employeeName, setEmployeeName] = useState("");
+    const [employeeRole, setEmployeeRole] = useState("");
+    const [employeeExperience, setEmployeeExperience] = useState("");
 
     const [search, setSearch] = useState("");
 
-    const employees = [
+    const [employees, setEmployees] = useState([
         {
             id: 1,
             name: "Pranita Mane",
@@ -30,7 +32,38 @@ function App() {
             experience: "4 years",
             skills: ["AI", "Java", "Express.js"]
         }
-    ];
+    ]);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        // Validation
+        if (
+            employeeName === "" ||
+            employeeRole === "" ||
+            employeeExperience === ""
+        ) {
+            alert("Please fill all fields");
+            return;
+        }
+
+        // Create new employee
+        const newEmployee = {
+            id: employees.length + 1,
+            name: employeeName,
+            role: employeeRole,
+            experience: employeeExperience + " years",
+            skills: []
+        };
+
+        // Add new employee
+        setEmployees([...employees, newEmployee]);
+
+        // Clear form
+        setEmployeeName("");
+        setEmployeeRole("");
+        setEmployeeExperience("");
+    };
 
     const filteredEmployees = employees.filter((employee) =>
         employee.name.toLowerCase().includes(search.toLowerCase())
@@ -40,30 +73,6 @@ function App() {
         <div className="app">
 
             <h1>Employee Management</h1>
-
-            {/* Employee Counter */}
-
-            <div className="employee-counter">
-
-                <h2>Total Employees: {employeeCount}</h2>
-
-                <button
-                    onClick={() => setEmployeeCount(employeeCount + 1)}
-                >
-                    Add Employee
-                </button>
-
-                <button
-                    onClick={() => {
-                        if (employeeCount > 0) {
-                            setEmployeeCount(employeeCount - 1);
-                        }
-                    }}
-                >
-                    Remove Employee
-                </button>
-
-            </div>
 
             {/* Search */}
 
@@ -79,6 +88,41 @@ function App() {
                 />
 
             </div>
+
+            {/* Add Employee Form */}
+
+            <form onSubmit={handleSubmit}>
+
+                <input
+                    type="text"
+                    placeholder="Enter Your Name"
+                    value={employeeName}
+                    onChange={(e) => setEmployeeName(e.target.value)}
+                />
+
+                <input
+                    type="text"
+                    placeholder="Enter Your Role"
+                    value={employeeRole}
+                    onChange={(e) => setEmployeeRole(e.target.value)}
+                />
+
+                <input
+                    type="number"
+                    placeholder="Enter Your Experience"
+                    value={employeeExperience}
+                    onChange={(e) => setEmployeeExperience(e.target.value)}
+                />
+
+                <button type="submit">
+                    Add Employee
+                </button>
+
+            </form>
+
+            {/* Employee Count */}
+
+            <h2>Total Employees: {employees.length}</h2>
 
             {/* Employee Cards */}
 

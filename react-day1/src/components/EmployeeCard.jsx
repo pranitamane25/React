@@ -5,10 +5,7 @@ function EmployeeCard({ name,role,experience,skills }) {
     const[likes,setLikes]=useState(0);
     const[showSkills,setShowSkills]=useState(true);
     const[isAvailable,setIsAvailable]=useState(true);
-    const[employeeName,setEmployeeName]=useState("");
-    const[employeeRole,setEmployeeRole]=useState("");
-    const[employeeExperience,setEmployeeExperience]=useState("");
-
+   
     return (
     <div className="employee-card">
         
@@ -47,30 +44,9 @@ function EmployeeCard({ name,role,experience,skills }) {
             </button>
             </div>
 
-            <input 
-            type="text"
-            placeholder="Enter Your Name: " 
-            value={employeeName}
-            onChange={(e)=>setEmployeeName(e.target.value)} 
-            />
-
-            <input 
-            type="text"
-            placeholder="Enter Your Role: " 
-            value={employeeRole}
-            onChange={(e)=>setEmployeeRole(e.target.value)} 
-            />
-
-            <input 
-            type="number"
-            placeholder="Enter Your Experience: " 
-            value={employeeExperience}
-            onChange={(e)=>setEmployeeExperience(e.target.value)} 
-            />
-
-            <p>Employee Name:{employeeName}</p>
-            <p>Employee Role:{employeeRole}</p>
-            <p>Employee Experience:{employeeExperience}</p>
+        
+ 
+         
     </div>
   );
 }
