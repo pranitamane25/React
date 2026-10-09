@@ -16,23 +16,24 @@ function App() {
     const[loading,setLoading]=useState(true);
     const[error,setError]=useState(null);
 
-            useEffect(() => {
-                fetch("https://jsonplaceholder.typicode.com/users")
+                        useEffect(() => {
+                fetch(
+                    "http://localhost:5045/api/Report/StatusWiseClientList?region=Mumbai&status=Pending"
+                )
                     .then((response) => {
                         if (!response.ok) {
-                            throw new Error("Failed to fetch users");
+                            throw new Error(`HTTP error: ${response.status}`);
                         }
 
                         return response.json();
                     })
                     .then((data) => {
-                        
+                        console.log("API response:", data);
                         setUsers(data);
-                        setLoading(false);
                     })
                     .catch((err) => {
+                        console.error("API error:", err);
                         setError(err.message);
-                        setLoading(false);
                     })
                     .finally(() => {
                         setLoading(false);
@@ -173,17 +174,25 @@ function App() {
 
             </div>
 
-                        <h2>Users from API</h2>
+                                    <h2>Clients from API</h2>
 
-            {loading && <p>Loading users...</p>}
+            {loading && <p>Loading clients...</p>}
 
             {error && <p>Error: {error}</p>}
 
-            {!loading && !error && (
+            {!loading && !error && users.length === 0 && (
+                <p>No clients found.</p>
+            )}
+
+            {!loading && !error && users.length > 0 && (
                 <ul>
-                    {users.map((user) => (
-                        <li key={user.id}>
-                            {user.name} — {user.email}
+                    {users.map((client) => (
+                        <li key={client.srNo}>
+                            <strong>{client.clientName}</strong>
+                            {" — "}
+                            {client.address}
+                            {" — "}
+                            {client.contactNo}
                         </li>
                     ))}
                 </ul>
