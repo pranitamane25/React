@@ -8,23 +8,36 @@ function App() {
         console.log("Employee Management Loaded");
     },[]);
 
-
     const [employeeName, setEmployeeName] = useState("");
     const [employeeRole, setEmployeeRole] = useState("");
     const [employeeExperience, setEmployeeExperience] = useState("");
-
     const [search, setSearch] = useState("");
+    const[users,setUsers]=useState([]);
+    const[loading,setLoading]=useState(true);
+    const[error,setError]=useState(null);
 
-    useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/users")
-        .then((response) => response.json())
-        .then((data) => {
-            console.log("API Users:", data);
-        })
-        .catch((error) => {
-            console.error("API Error:", error);
-        });
-}, []);
+            useEffect(() => {
+                fetch("https://jsonplaceholder.typicode.com/users")
+                    .then((response) => {
+                        if (!response.ok) {
+                            throw new Error("Failed to fetch users");
+                        }
+
+                        return response.json();
+                    })
+                    .then((data) => {
+                        
+                        setUsers(data);
+                        setLoading(false);
+                    })
+                    .catch((err) => {
+                        setError(err.message);
+                        setLoading(false);
+                    })
+                    .finally(() => {
+                        setLoading(false);
+                    });
+            }, []);
 
     const [employees, setEmployees] = useState([
         {
@@ -159,6 +172,22 @@ function App() {
                 ))}
 
             </div>
+
+                        <h2>Users from API</h2>
+
+            {loading && <p>Loading users...</p>}
+
+            {error && <p>Error: {error}</p>}
+
+            {!loading && !error && (
+                <ul>
+                    {users.map((user) => (
+                        <li key={user.id}>
+                            {user.name} — {user.email}
+                        </li>
+                    ))}
+                </ul>
+            )}
 
         </div>
     );
