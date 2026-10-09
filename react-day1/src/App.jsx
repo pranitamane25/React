@@ -1,14 +1,30 @@
-import { useState } from "react";
+import { useEffect , useState } from "react";
 import EmployeeCard from "./components/EmployeeCard";
 import "./App.css";
 
 function App() {
+
+    useEffect(() => {
+        console.log("Employee Management Loaded");
+    },[]);
+
 
     const [employeeName, setEmployeeName] = useState("");
     const [employeeRole, setEmployeeRole] = useState("");
     const [employeeExperience, setEmployeeExperience] = useState("");
 
     const [search, setSearch] = useState("");
+
+    useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/users")
+        .then((response) => response.json())
+        .then((data) => {
+            console.log("API Users:", data);
+        })
+        .catch((error) => {
+            console.error("API Error:", error);
+        });
+}, []);
 
     const [employees, setEmployees] = useState([
         {
@@ -33,6 +49,10 @@ function App() {
             skills: ["AI", "Java", "Express.js"]
         }
     ]);
+
+     useEffect(()=>{
+        console.log("Search value", search)
+    },[search]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
